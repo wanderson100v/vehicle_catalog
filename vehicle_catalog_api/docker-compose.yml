@@ -16,7 +16,7 @@ services:
       - ./api:/api
     depends_on:
       - mysql
-    command: 'npm run "start-debug"'
+    command: 'npm run "start-dev"'
   mysql:
     image: mysql:latest
     environment:
