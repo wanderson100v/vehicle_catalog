@@ -2,6 +2,7 @@ import express from "express"
 import { Knex } from "knex";
 import connection from "./database/connection";
 import { VehiclesRouter, BrandsRouter, ModelsRouter } from "./routers";
+import { UsersRouter } from "./routers/UsersRouter";
 
 export class App{
 
@@ -26,6 +27,7 @@ export class App{
     }
 
     private routes(){
+        this.server.use('/users',new UsersRouter(this.databaseConnection).init())
         this.server.use('/vehicles',new VehiclesRouter(this.databaseConnection).init())
         this.server.use('/vehicles/brands',new BrandsRouter(this.databaseConnection).init())
         this.server.use('/vehicles/models',new ModelsRouter(this.databaseConnection).init())

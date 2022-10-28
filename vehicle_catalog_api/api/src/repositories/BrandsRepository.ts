@@ -2,7 +2,7 @@
 import { Brand } from '../entities';
 import Repository from './Repository';
 
-const TABLE_NAME = 'brands';
+const TABLE_NAME = 'vehicles';
 
 export class BrandsRepository extends Repository<Brand>{
    
