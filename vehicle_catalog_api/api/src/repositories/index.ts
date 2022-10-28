@@ -1,0 +1,1 @@
+export {VehicleRepository} from './VehicleRepository'

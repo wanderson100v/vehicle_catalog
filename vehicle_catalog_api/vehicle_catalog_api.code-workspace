@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Docker: Attach to Node",
+				"type": "node",
+				"request": "attach",
+				"port": 9229,
+				"address": "localhost",
+				"localRoot": "${workspaceFolder}/api",
+				"remoteRoot": "/api",
+				"protocol": "inspector",
+				"restart": true
+			}
+		]
+	},
+}
