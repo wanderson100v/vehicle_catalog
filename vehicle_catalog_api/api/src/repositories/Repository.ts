@@ -13,17 +13,19 @@ abstract class Repository<T> {
       return allElements;
    }
 
-   public async create(entity: T): Promise<boolean>{
+   public async create(entity: T): Promise<boolean>|never{
       let insert = this.connection(this.tableName).insert(entity);
-      return true;
+      return insert;
    }
 
-   public async edit(entity: T): Promise<boolean>{
-      return true;
+   public async edit(id:number, entity: T): Promise<boolean>|never{
+      let updated = this.connection(this.tableName).where('id',id).update(entity)
+      return updated;
    }
 
-   public async delete(entity: T): Promise<boolean>{
-      return true;
+   public async delete(id:number): Promise<boolean>|never{
+      let deleted = this.connection(this.tableName).where('id',id).del()
+      return deleted;
    }
 }
 

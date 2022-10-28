@@ -1,4 +1,5 @@
-import knex from "knex";
+import knex, { Knex } from "knex";
 import {development} from "../../knexfile"
 
-export default knex(development)
+const connection:Knex = knex(development)
+export default connection;
