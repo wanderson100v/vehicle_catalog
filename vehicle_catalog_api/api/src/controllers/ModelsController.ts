@@ -46,7 +46,7 @@ export class ModelsController extends Controller<Model>{
                 name: name
             }
             await this.repository.edit(id, model);
-            ResponseHelper.success(res, Success.Created, "Modelo de editado cadastrado com sucesso")
+            ResponseHelper.success(res, Success.Created, "Modelo de veículo editado com sucesso")
         }catch(e:any){
             console.log(e)
             if(e.code == 'ER_DUP_ENTRY'){
@@ -61,10 +61,10 @@ export class ModelsController extends Controller<Model>{
         try{
             let id =  parseInt(req.params.id);
             await this.repository.delete(id);
-            ResponseHelper.success(res, Success.Created, "Modelo de deletado com sucesso")
+            ResponseHelper.success(res, Success.Created, "Modelo de veículos deletado com sucesso")
         }catch(e:any){
             console.log(e)
-            ResponseHelper.serverError(res, ServerError.InternalServerError, 'Ocorreu um erro ao excluir modelo de veículo');
+            ResponseHelper.serverError(res, ServerError.InternalServerError, 'Ocorreu um erro ao excluir modelo de veículos');
         }
     }
 

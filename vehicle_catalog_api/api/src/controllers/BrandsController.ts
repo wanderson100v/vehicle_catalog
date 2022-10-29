@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import { Brand } from '../entities';
+import { ClienteError, ResponseHelper, ServerError, Success } from '../helpers';
 import { BrandsRepository } from '../repositories';
 import { Controller } from './Controller';
 
@@ -12,16 +13,10 @@ export class BrandsController extends Controller<Brand>{
     public async all(req: Request, res:Response){
         try{
             let brands = await this.repository.all();
-            res.json({
-                type:'success',
-                items: brands
-            })
+            ResponseHelper.dataList(res,brands);
         }catch(e:any){
             console.log(e)
-            res.status(500).json({
-                type:'error',
-                message: 'Ocorreu um erro buscar marcas'
-            });
+            ResponseHelper.serverError(res, ServerError.InternalServerError, "Ocorreu um erro ao buscar marcas de veículos")
         }
     }
 
@@ -32,23 +27,14 @@ export class BrandsController extends Controller<Brand>{
                 name: name
             }
             await this.repository.create(brand);
-            res.json({
-                type:'success',
-                message: 'Marca cadastrada com sucesso'
-            })
+            ResponseHelper.success(res, Success.Created, "Marca de veículos cadastrada com sucesso")
         }catch(e:any){
-            console.log(e)
+            console.log(e);
             if(e.code == 'ER_DUP_ENTRY'){
-                res.status(400).json({
-                    type:'error',
-                    message: 'O nome da marca deve ser único'
-                });
+                ResponseHelper.clienteError(res,ClienteError.BadRequest,'O nome da marca de veículos deve ser único');
                 return;
             }
-            res.status(500).json({
-                type:'error',
-                message: 'Ocorreu um erro ao cadastrar a marca'
-            });
+            ResponseHelper.serverError(res, ServerError.InternalServerError, 'Ocorreu um erro ao cadastrar marca de veículos');
         }
     }
 
@@ -60,23 +46,14 @@ export class BrandsController extends Controller<Brand>{
                 name: name
             }
             await this.repository.edit(id, brand);
-            res.json({
-                type:'success',
-                message: 'Marca editada com sucesso'
-            })
+            ResponseHelper.success(res, Success.Created, "Marca de veículos editada com sucesso")
         }catch(e:any){
             console.log(e)
             if(e.code == 'ER_DUP_ENTRY'){
-                res.status(400).json({
-                    type:'error',
-                    message: 'O nome da marca deve ser único'
-                });
+                ResponseHelper.clienteError(res,ClienteError.BadRequest,'O nome da marca deve ser único');
                 return;
             }
-            res.status(500).json({
-                type:'error',
-                message: 'Ocorreu um erro ao editar a marca'
-            });
+            ResponseHelper.serverError(res, ServerError.InternalServerError, 'Ocorreu um erro ao editar marca de veículos');
         }
     }
 
@@ -84,16 +61,10 @@ export class BrandsController extends Controller<Brand>{
         try{
             let id =  parseInt(req.params.id);
             await this.repository.delete(id);
-            res.json({
-                type:'success',
-                message: 'Marca deleteda com sucesso'
-            })
+            ResponseHelper.success(res, Success.Created, "Marca de veículos deletada com sucesso")
         }catch(e:any){
-            console.log(e)
-            res.status(500).json({
-                type:'error',
-                message: 'Ocorreu um erro ao deletar a marca'
-            });
+            console.log(e);
+            ResponseHelper.serverError(res, ServerError.InternalServerError, 'Ocorreu um erro ao excluir marca de veículos');
         }
     }
 
