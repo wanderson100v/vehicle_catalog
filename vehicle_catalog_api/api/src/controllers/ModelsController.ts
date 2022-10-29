@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import { Model } from '../entities';
+import { ClienteError, ResponseHelper, ServerError, Success } from '../helpers';
 import { ModelsRepository } from '../repositories';
 import { Controller } from './Controller';
 
@@ -11,17 +12,11 @@ export class ModelsController extends Controller<Model>{
 
     public async all(req: Request, res:Response){
         try{
-            let Models = await this.repository.all();
-            res.json({
-                type:'success',
-                items: Models
-            })
+            let models = await this.repository.all();
+            ResponseHelper.dataList(res,models);
         }catch(e:any){
             console.log(e)
-            res.status(500).json({
-                type:'error',
-                message: 'Ocorreu um erro buscar Modelos'
-            });
+            ResponseHelper.serverError(res, ServerError.InternalServerError, "Ocorreu um erro ao buscar modelos de veículos")
         }
     }
 
@@ -32,23 +27,14 @@ export class ModelsController extends Controller<Model>{
                 name: name
             }
             await this.repository.create(model);
-            res.json({
-                type:'success',
-                message: 'Modelo cadastrado com sucesso'
-            })
+            ResponseHelper.success(res, Success.Created, "Modelo de veículo cadastrado com sucesso")
         }catch(e:any){
             console.log(e)
             if(e.code == 'ER_DUP_ENTRY'){
-                res.status(400).json({
-                    type:'error',
-                    message: 'O nome da Modelo deve ser único'
-                });
+                ResponseHelper.clienteError(res,ClienteError.BadRequest,'O nome do modelo de veículo deve ser único');
                 return;
             }
-            res.status(500).json({
-                type:'error',
-                message: 'Ocorreu um erro ao cadastrar o Modelo'
-            });
+            ResponseHelper.serverError(res, ServerError.InternalServerError, 'Ocorreu um erro ao cadastrar modelo de veículo');
         }
     }
 
@@ -56,27 +42,18 @@ export class ModelsController extends Controller<Model>{
         try{
             let id =  parseInt(req.params.id);
             let name =  req.body.name;
-            let Model: Model={
+            let model: Model={
                 name: name
             }
-            await this.repository.edit(id, Model);
-            res.json({
-                type:'success',
-                message: 'Modelo editada com sucesso'
-            })
+            await this.repository.edit(id, model);
+            ResponseHelper.success(res, Success.Created, "Modelo de editado cadastrado com sucesso")
         }catch(e:any){
             console.log(e)
             if(e.code == 'ER_DUP_ENTRY'){
-                res.status(400).json({
-                    type:'error',
-                    message: 'O nome da Modelo deve ser único'
-                });
+                ResponseHelper.clienteError(res,ClienteError.BadRequest,'O nome do modelo de veículo deve ser único');
                 return;
             }
-            res.status(500).json({
-                type:'error',
-                message: 'Ocorreu um erro ao editar a Modelo'
-            });
+            ResponseHelper.serverError(res, ServerError.InternalServerError, 'Ocorreu um erro ao editar modelo de veículo');
         }
     }
 
@@ -84,16 +61,10 @@ export class ModelsController extends Controller<Model>{
         try{
             let id =  parseInt(req.params.id);
             await this.repository.delete(id);
-            res.json({
-                type:'success',
-                message: 'Modelo deleteda com sucesso'
-            })
+            ResponseHelper.success(res, Success.Created, "Modelo de deletado com sucesso")
         }catch(e:any){
             console.log(e)
-            res.status(500).json({
-                type:'error',
-                message: 'Ocorreu um erro ao deletar a Modelo'
-            });
+            ResponseHelper.serverError(res, ServerError.InternalServerError, 'Ocorreu um erro ao excluir modelo de veículo');
         }
     }
 
