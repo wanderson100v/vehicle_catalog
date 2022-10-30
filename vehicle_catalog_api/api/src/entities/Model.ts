@@ -3,4 +3,5 @@ export interface Model{
     name:string;
     created_at?: Date;
     updated_at?: Date;
+    brand_id: number;
 }

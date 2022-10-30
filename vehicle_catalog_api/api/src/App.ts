@@ -3,6 +3,7 @@ import { Knex } from "knex";
 import connection from "./database/connection";
 import { VehiclesRouter, BrandsRouter, ModelsRouter } from "./routers";
 import { UsersRouter } from "./routers/UsersRouter";
+var cors = require('cors')
 
 export class App{
 
@@ -18,19 +19,20 @@ export class App{
 
     public listen(){
         this.server.listen(3000, ()=>{
-            console.log("server online")
+            console.log("server online");
         });
     }
     
     private middleware(){
-        this.server.use(express.json())
+        this.server.use(express.json());
+        this.server.use(cors());
     }
 
     private routes(){
-        this.server.use('/users',new UsersRouter(this.databaseConnection).init())
-        this.server.use('/vehicles',new VehiclesRouter(this.databaseConnection).init())
-        this.server.use('/vehicles/brands',new BrandsRouter(this.databaseConnection).init())
-        this.server.use('/vehicles/models',new ModelsRouter(this.databaseConnection).init())
+        this.server.use('/users',new UsersRouter(this.databaseConnection).init());
+        this.server.use('/vehicles',new VehiclesRouter(this.databaseConnection).init());
+        this.server.use('/vehicles/brands',new BrandsRouter(this.databaseConnection).init());
+        this.server.use('/vehicles/models',new ModelsRouter(this.databaseConnection).init());
     }
 
 }

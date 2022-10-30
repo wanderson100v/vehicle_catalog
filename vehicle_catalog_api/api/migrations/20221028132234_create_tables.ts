@@ -23,14 +23,15 @@ export async function up(knex: Knex): Promise<void> {
         table.string('name').notNullable().unique();
         table.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'))
         table.dateTime('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'))
+        table.integer('brand_id').unsigned().notNullable().references('id').inTable('brands');
     })
     .createTable('vehicles',(table)=>{
         table.increments();
         table.string('image_url').notNullable();
-        table.string('name');
+        table.string('name').notNullable();
+        table.double('price').notNullable()
         table.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
         table.dateTime('updated_at').defaultTo(knex.raw('NULL ON UPDATE CURRENT_TIMESTAMP'));
-        table.integer('brand_id').unsigned().notNullable().references('id').inTable('brands');
         table.integer('model_id').unsigned().notNullable().references('id').inTable('models');
     });
 }

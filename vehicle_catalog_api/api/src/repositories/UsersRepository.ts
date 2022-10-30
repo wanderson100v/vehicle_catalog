@@ -17,6 +17,10 @@ export class UsersRepository extends Repository<User>{
       return allElements;
    }
 
+   public makeSearchWhereClause(partialQuery: any, searchString:string) {
+      return partialQuery.where('name','like',"%"+searchString+"%");
+   }
+
    public async create(user: User): Promise<boolean>|never{
       user.password = await bcrypt.hash(user.password, 10)
       return super.create(user);

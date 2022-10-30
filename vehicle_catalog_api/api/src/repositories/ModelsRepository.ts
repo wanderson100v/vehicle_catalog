@@ -9,4 +9,9 @@ export class ModelsRepository extends Repository<Model>{
    constructor(connection:any){
       super(connection,TABLE_NAME);
    }
+
+   public makeSearchWhereClause(partialQuery: any, searchString:string) {
+      return partialQuery.where('name','like',"%"+searchString+"%");
+   }
+
 }

@@ -23,6 +23,12 @@ export enum ResponseType{
 
 type ResponseCode = Success | ClienteError | ServerError; 
 
+export interface CustomResponse{
+    type:ResponseType
+    code: ResponseCode;
+    message: string;
+}
+
 export class ResponseHelper{
 
     public static makeResponse(res: Response, code: ResponseCode, type:ResponseType,  message:string){
@@ -30,6 +36,15 @@ export class ResponseHelper{
             type: type,
             message: message
         });
+    }
+
+    public static checkExistsAndSend(res: Response, customResponse: any): boolean{
+        if ('type' in customResponse && 'code' in customResponse && 'message' in customResponse){
+            customResponse = (customResponse as CustomResponse)
+            ResponseHelper.makeResponse(res, customResponse.code, customResponse.type, customResponse.message)
+            return true;
+        }
+        return false;
     }
 
     public static clienteError(res:Response, errorCode: ClienteError, message:string){

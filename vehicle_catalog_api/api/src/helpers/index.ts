@@ -1,1 +1,7 @@
-export {ResponseHelper, Success, ClienteError, ServerError} from './ResponseHelper'
+export {
+    ResponseHelper, 
+    Success, 
+    ClienteError, 
+    ServerError, 
+    CustomResponse
+} from './ResponseHelper'
