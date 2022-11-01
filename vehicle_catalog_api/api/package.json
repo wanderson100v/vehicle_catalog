@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "nodemon -L --watch '*.ts' --exec 'ts-node' ./src/index.ts",
-    "start-debug": "nodemon -L --watch '*.ts' --exec \"node --inspect=0.0.0.0:9229 --require ts-node/register src/index.ts\"",
+    "start-debug": "nodemon -L --watch '*.ts' --exec \"npx --inspect=0.0.0.0:9229 --require ts-node/register src/index.ts\"",
     "start-prod": "node -L ./src/index.ts"
   },
   "keywords": [

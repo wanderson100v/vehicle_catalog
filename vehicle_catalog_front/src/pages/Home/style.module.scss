@@ -1,24 +1,10 @@
-.centerSectionTitle,
 .mySwiper,
-.feedbackEmptyItems,
 .mySwiperContainer{
     display: flex;
     justify-content: center;
     background-color: rgb(243, 243, 243);
     align-content: center;
     align-items: center;
-}
-.headerNav{
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    align-items: center;
-    background-color: rgb(99, 99, 99);
-    padding-left:20px;
-    padding-right:25px;
-    height: 60px;
-    color:white
-
 }
 
 .mySwiperContainer{
@@ -28,27 +14,4 @@
 .mySwiper,.feedbackEmptyItems{
     height: 250px;
     color:black;
-}
-
-.vehiclesContainer{
-    padding: 30px;
-    background-color: rgb(243, 243, 243);
-    display: flex;
-    justify-items: center;
-}
-
-.paginationContainer{
-    display: flex;
-    justify-content: center;
-    padding: 30px;
-}
-
-.centerSectionTitle{
-    padding-top: 10px;
-    height: 40px;
-    color:white;
-    font-size: bold;
-    border-top: 2px solid rgb(150, 150, 150);
-    border-bottom: 2px solid rgb(150, 150, 150);
-    background-color:rgb(187, 187, 187);
 }

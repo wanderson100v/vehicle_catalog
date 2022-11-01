@@ -1,0 +1,12 @@
+.vehiclesContainer{
+    background-color: rgb(243, 243, 243);
+    padding: 20px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.vehiclesGridItem{
+    display: flex;
+    justify-content: center;
+    min-width: 210px;
+}

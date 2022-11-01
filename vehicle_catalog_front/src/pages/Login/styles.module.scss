@@ -1,0 +1,47 @@
+.sectionLoginContainer{
+    background-color: rgb(124, 124, 124);
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+
+
+.sectionLogin{
+    background-color: white;
+}
+
+.card{
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 10px;
+}
+
+.cardHeader{
+    background-color: rgb(186, 198, 238);
+    border-bottom: 1px solid gray;
+    text-align: center;
+}
+
+.content{
+   padding: 20px;
+}
+
+.cardActions{
+    display: flex;
+    justify-content: end;
+   
+}
+
+.actionsContainer{
+    padding-bottom:20px;
+    padding-right:20px;
+}
+
+.loginButton{
+    max-width: 100px;
+}
+
+

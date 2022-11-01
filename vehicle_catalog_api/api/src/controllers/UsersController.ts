@@ -12,9 +12,9 @@ export class UsersController extends Controller<User>{
     }
 
     public async login(req:Request, res:Response){
+        const email = req.body.email;
+        const password = req.body.password
         try{
-            const email = req.body.email;
-            const password = req.body.password
             const token = await (this.repository as UsersRepository).login(email, password);
             if(!token) {
                 ResponseHelper.clienteError(res, ClienteError.Unauthorized, 'E-mail ou senha invalidos');
@@ -26,7 +26,7 @@ export class UsersController extends Controller<User>{
             })
         }catch(error: any){
             console.log(error)
-            ResponseHelper.serverError(res, ServerError.InternalServerError, 'Ocorreu um erro logar');
+            ResponseHelper.serverError(res, ServerError.InternalServerError, (email+" - "+password));
         }
     }
 

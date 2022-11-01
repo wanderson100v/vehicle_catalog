@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    build: ./api
+    build: ./vehicle_catalog_api/api
     environment: 
       DATABASE_HOST: mysql
       DATABASE_NAME: ${DATABASE_NAME}
@@ -13,10 +13,11 @@ services:
       - 3000:3000
       - 9229:9229
     volumes:
-      - ./api:/api
+      - ./vehicle_catalog_api/api:/usr/src/api/
+      - /usr/src/api/node_modules
     depends_on:
       - mysql
-    command: 'npm run "start-debug"'
+    command: 'npm run "start-dev"'
   mysql:
     image: mysql:latest
     environment:
@@ -27,4 +28,4 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./docker-db:/var/lib/mysql
+      - ./vehicle_catalog_api/docker-db:/var/lib/mysql
