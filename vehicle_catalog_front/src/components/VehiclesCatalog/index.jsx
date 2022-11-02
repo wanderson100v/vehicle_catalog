@@ -171,10 +171,10 @@ export function VehiclesCatalog({canHandle=true}){
                 <PersistVehicleDialog 
                     title={'Cadastrar novo veículo'}
                     persistDialogIsOpen={createDialogIsOpen} 
-                    closePersistDialog={onPersistHandle} 
+                    closePersistDialog={closeCreateDialog} 
                     showMessage={showMessage} 
                     setIsLoading={setIsLoading} 
-                    onSucessHandle={onCreateHandle}
+                    onSucessHandle={onPersistHandle}
                 />}
             <Snackbar open={feedbackMessage.open} autoHideDuration={6000} onClose={closeFeedbackMessage} anchorOrigin={{ 'vertical':'bottom', 'horizontal':'right' }} >
                 <Alert onClose={closeFeedbackMessage} severity={feedbackMessage.severity} sx={{ width: '100%' }}>

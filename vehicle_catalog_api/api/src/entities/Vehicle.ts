@@ -1,6 +1,6 @@
 export interface Vehicle{
     id?:number;
-    image_url:string;
+    image_url?:string;
     price:number,
     name: string;
     created_at?: Date;

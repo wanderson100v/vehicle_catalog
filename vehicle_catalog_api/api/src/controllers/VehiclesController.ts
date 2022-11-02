@@ -23,10 +23,6 @@ export class VehiclesController extends Controller<Vehicle>{
     }
 
     protected async getCleanParamsToCreate(req: any):Promise<Vehicle|CustomResponse>{
-        return this.getCleanParamsToEdit(req);
-    }
-
-    protected async getCleanParamsToEdit(req: any):Promise<Vehicle|CustomResponse>{
         if (!req.files) {
             const customResponse: CustomResponse = {
                 type: ResponseType.Error,
@@ -59,6 +55,38 @@ export class VehiclesController extends Controller<Vehicle>{
             name: name,
             model_id: modelId,
         }
+        return vehicle;
+    }
+
+    protected async getCleanParamsToEdit(req: any):Promise<Vehicle|CustomResponse>{
+        let image = null
+        if (req.files && req.files.image) {
+            image = req.files.image;
+            const path =  __dirname + "/../public/media/" + image.name;
+    
+            image.mv(path, (err:any) => {
+                if (err) {
+                    const customResponse: CustomResponse = {
+                        type: ResponseType.Error,
+                        code: ClienteError.Unauthorized,
+                        message: "Erro ao cadastrar imagem do veículo"
+                    }
+                    return customResponse
+                }
+            });
+        }
+
+        let name =  req.body.name;
+        let price = req.body.price;
+        let modelId =  req.body.model_id;
+        
+        let vehicle: Vehicle={
+            price: price,
+            name: name,
+            model_id: modelId,
+        }
+
+        if(image) vehicle.image_url = "media/" + image.name;
         return vehicle;
     }
 

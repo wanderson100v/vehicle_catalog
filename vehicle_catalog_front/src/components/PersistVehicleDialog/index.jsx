@@ -20,13 +20,18 @@ export function PersistVehicleDialog({title,vehicle=null, persistDialogIsOpen, c
             image_url: ''
         }
     }
+
+    const vehicleProvider = new VehicleProvider('multipart/form-data');
+    const brandProvider = new BrandProvider();
+    const modelProvider = new ModelProvider();
+
     const [name, setName] = useState(vehicle.name);
     const [nameError, setNameError] = useState('');
     const [price, setPrice] = useState(vehicle.price);
     const [priceError, setPriceError] = useState('');
     const [image, setImage] = useState();
     const [imageError, setImageError] = useState('');
-    const [imagePreview, setImagePreview] = useState(vehicle.image_url);
+    const [imagePreview, setImagePreview] = useState((vehicle.image_url)?vehicleProvider.baseUrl+vehicle.image_url: '');
     const [selectedModel, setSelectedModel] = useState(vehicle.model_id);
     const [selectedModelError, setSelectedModelError] = useState('');
 
@@ -34,9 +39,7 @@ export function PersistVehicleDialog({title,vehicle=null, persistDialogIsOpen, c
     const [allModels, setAllModels] = useState([]);
 
     
-    const vehicleProvider = new VehicleProvider('multipart/form-data');
-    const brandProvider = new BrandProvider();
-    const modelProvider = new ModelProvider();
+   
 
     const generateModelsGroupByBrands = () =>{
         const newModelsGroupByBrands = [];
@@ -91,7 +94,7 @@ export function PersistVehicleDialog({title,vehicle=null, persistDialogIsOpen, c
             hasError =true;
         }else setSelectedModelError('');
 
-        if(!image){
+        if(!vehicle.id && !image){
             setImageError('A imagem do veículo é obrigatória');
             hasError =true;
         }else setImageError('');
