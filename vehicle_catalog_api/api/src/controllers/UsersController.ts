@@ -15,15 +15,12 @@ export class UsersController extends Controller<User>{
         const email = req.body.email;
         const password = req.body.password
         try{
-            const token = await (this.repository as UsersRepository).login(email, password);
-            if(!token) {
+            const response = await (this.repository as UsersRepository).login(email, password);
+            if(!response || !response.token) {
                 ResponseHelper.clienteError(res, ClienteError.Unauthorized, 'E-mail ou senha invalidos');
                 return;
             }
-            ResponseHelper.data(res,{
-                auth:true,
-                token: token
-            })
+            ResponseHelper.data(res,response);
         }catch(error: any){
             console.log(error)
             ResponseHelper.serverError(res, ServerError.InternalServerError, (email+" - "+password));

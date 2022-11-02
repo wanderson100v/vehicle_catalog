@@ -42,7 +42,7 @@ export function Login(){
     }
 
     const goToAdmPage = async ()=>{
-        navigator(ALIAS_ROUTES.adm);
+        navigator(ALIAS_ROUTES['adm-home']);
     }
 
     const login = async ()=>{
@@ -53,7 +53,8 @@ export function Login(){
                 'email': email,
                 'password': password
             });
-            if(response.data.data.auth) {
+            if(response.data.data.token) {
+                localStorage.setItem('login_data', JSON.stringify(response.data.data));
                 goToAdmPage();
                 setFeedbackError('');
                 return;

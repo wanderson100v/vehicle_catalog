@@ -1,3 +1,10 @@
+.headerNav,
+.headerRight{
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
 .headerNav{
     display: flex;
     justify-content: space-between;

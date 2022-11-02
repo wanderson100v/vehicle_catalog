@@ -17,7 +17,7 @@ export function Home(){
             <SectionHeader title="Novidades" description="Novos veículos mais em conta"/>
             <CustomSwiper/>
             <SectionHeader title="Catalogo completo"/>
-            <VehiclesCatalog/>
+            <VehiclesCatalog canHandle={false}/>
         </>
     );
 }
@@ -59,16 +59,16 @@ function CustomSwiper(){
                     }}
                     navigation
                     breakpoints={{
-                        350: { slidesPerView: 2},
-                        640: { slidesPerView: 3},
-                        800: { slidesPerView: 4},
-                        1024: { slidesPerView: 5},
+                        350: { slidesPerView: (evidendVehicles.length < 2)? evidendVehicles.length: 2},
+                        640: { slidesPerView: (evidendVehicles.length < 3)? evidendVehicles.length: 3},
+                        800: { slidesPerView: (evidendVehicles.length < 4)? evidendVehicles.length: 4},
+                        1024: { slidesPerView: (evidendVehicles.length < 5)? evidendVehicles.length: 5},
                     }}
                     modules={[Pagination, Navigation]}
                     className={styles.mySwiper}
                 >
                     {evidendVehicles.map((evidendVehicle)=>(<>
-                        <SwiperSlide><VehicleCard vehicle={evidendVehicle}/></SwiperSlide>
+                        <SwiperSlide><VehicleCard vehicle={evidendVehicle} defaultCanHandle={false}/></SwiperSlide>
                     </>))}
                     
                 </Swiper>

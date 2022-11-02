@@ -2,8 +2,8 @@ import AxiosProvider from '../AxiosProvider';
 
 export class UserProvider extends AxiosProvider {
   
-  constructor() {
-    super();
+  constructor(contentType = 'application/json') {
+    super('/users/', contentType);
   }
 
   login(data) {

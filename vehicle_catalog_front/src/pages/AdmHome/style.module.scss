@@ -1,0 +1,17 @@
+.mySwiper,
+.mySwiperContainer{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(243, 243, 243);
+    align-content: center;
+    align-items: center;
+}
+
+.mySwiperContainer{
+    padding: 20px;
+}
+
+.mySwiper,.feedbackEmptyItems{
+    height: 250px;
+    color:black;
+}

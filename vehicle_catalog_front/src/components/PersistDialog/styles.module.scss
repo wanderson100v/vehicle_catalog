@@ -1,0 +1,8 @@
+.titleContainer{
+    margin: -14px -22px 10px -22px;
+    & .MuiPaper-root {
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+        background-color: '#D32F2F';
+        color: white;
+    }
+}

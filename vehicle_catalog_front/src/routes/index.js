@@ -6,16 +6,17 @@ import {
 } from "react-router-dom";
 
 import {
+    Page404,
     Home,
     Login,
-    Page404,
+    AdmHome,
 } from '../pages';
 
 export const ALIAS_ROUTES={
     'home':'/',
     'login':'/login',
-    'adm':'/adm',
-    'vehicles':'/adm/vehicles'
+    'adm-home':'/adm',
+    'adm-vehicles':'/adm/vehicles'
 }
 
 export default function Router() {
@@ -24,7 +25,7 @@ export default function Router() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route path="adm">
-                <Route path="/adm" element={<Home />} />
+                <Route path="/adm" element={<AdmHome />} />
                 <Route path="vehicles/" element={<Home />} />
                 <Route path="vehicles/:id" element={<Home />} />
             </Route>

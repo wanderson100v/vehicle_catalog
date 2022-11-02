@@ -1,9 +1,11 @@
 import express from "express"
+const fileUpload = require("express-fileupload");
 import { Knex } from "knex";
 import connection from "./database/connection";
 import { VehiclesRouter, BrandsRouter, ModelsRouter } from "./routers";
 import { UsersRouter } from "./routers/UsersRouter";
 var cors = require('cors')
+const path = require('path')
 
 export class App{
 
@@ -25,7 +27,9 @@ export class App{
     
     private middleware(){
         this.server.use(express.json());
+        this.server.use(fileUpload({createParentPath: true,}));
         this.server.use(cors());
+        this.server.use(express.static(__dirname +'/public'));
     }
 
     private routes(){

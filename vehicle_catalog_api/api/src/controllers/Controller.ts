@@ -20,6 +20,17 @@ export abstract class Controller<T> {
         }
     }
 
+    public async findById(req: Request, res:Response){
+        try{
+            let id =  parseInt(req.params.id);
+            const entity = await this.repository.findById(id);
+            ResponseHelper.data(res, entity);
+        }catch(e){
+            console.log(e)
+            ResponseHelper.serverError(res, ServerError.InternalServerError, "Ocorreu um erro ao buscar dados")
+        }
+    }
+
     public async search(req: Request, res:Response){
         try{
             let offset = parseInt(req.query.offset as string);

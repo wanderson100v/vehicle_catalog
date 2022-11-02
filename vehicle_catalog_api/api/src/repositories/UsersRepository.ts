@@ -26,13 +26,19 @@ export class UsersRepository extends Repository<User>{
       return super.create(user);
    }
 
-   public async login(email: string, password: string): Promise<string>|never{
+   public async login(email: string, password: string): Promise<any>|never{
         const user = await  this.findByEmail(email);
         if(!user) return '';
         const compare = await bcrypt.compare(password, user.password)
         if(compare){
             const token = jwt.sign({userId:user.id}, process.env.JWT_SECRET,{expiresIn:5000})
-            return token
+            return {
+               token: token,
+               user:{
+                  id:user.id,
+                  name:user.name,
+               }
+            }
         }
         return '';
   }

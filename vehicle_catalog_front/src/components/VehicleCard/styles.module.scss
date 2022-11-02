@@ -11,3 +11,44 @@
         max-width: 200px;
     }
 }
+
+.actionsContainer{
+    padding:0;
+    margin:0;
+    display: flex;
+    justify-content: end;
+    border-top: 1px solid rgba(133, 133, 133, 0.397);
+   
+}
+.actions{
+    padding:0;
+    margin:0;
+}
+
+.cardContent{
+    border-top: 3px solid rgb(177, 177, 177);
+    padding: 20px;
+}
+
+.modelAndBrandContainer{
+    margin-top:10px;
+    display: flex;
+    justify-content: end;
+   
+}
+
+
+
+.price{
+    color: green;
+    padding-right: 5px;
+    
+}
+
+.brand{
+    color: rgb(96, 125, 252);
+}
+
+.model{
+    color: rgb(145, 121, 252)
+}

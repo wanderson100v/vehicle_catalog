@@ -11,6 +11,7 @@ export class VehiclesRouter extends CustomRouter<Vehicle>{
 
     public init(): any {
         this.router.get("/",verifyJWT, this.controller.all.bind(this.controller));
+        this.router.get("/one/:id", this.controller.findById.bind(this.controller));
         this.router.get("/search", this.controller.search.bind(this.controller));
         this.router.get("/evidenceds", (this.controller as VehiclesController).evidenceds.bind(this.controller));
         this.router.post("/",verifyJWT, this.controller.create.bind(this.controller));
